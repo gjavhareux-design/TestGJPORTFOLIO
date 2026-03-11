@@ -202,10 +202,11 @@
             font-size: 2.5rem; 
         }
         
+        /* --- UPDATED SOCIAL LINKS CSS --- */
         .social-links { 
             display: flex; 
-            gap: 20px; 
-            margin-top: 10px; 
+            gap: 40px; /* Made the gap a bit wider so the text has room to breathe */
+            margin-top: 20px; 
         }
         
         /* THIS KEEPS YOUR ICONS THE CORRECT SIZE */
@@ -217,9 +218,26 @@
             opacity: 0.8; 
         }
         
-        .social-icon-img:hover { 
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px; /* Space between the icon and the text */
+            text-decoration: none;
+        }
+        .social-icon-img { 
+            width: 36px; height: 36px; object-fit: contain; 
+            transition: all 0.3s ease; opacity: 0.8; 
+        }
+        
+        /* The Hover Effects */
+        .social-item:hover .social-icon-img { 
             opacity: 1; 
             transform: translateY(-5px) scale(1.1); 
+        }
+        
+        .social-item:hover .social-label {
+            color: var(--accent); /* Changes the text to your signature pink! */
         }
 
         /* --- WIP POPUP CSS --- */
@@ -460,17 +478,20 @@
             <button onclick="Tawk_API.showWidget(); Tawk_API.maximize();" class="cta-button ripple-btn" style="border: none; font-family: inherit; background: #222; color: #fff;">Chat Now</button>
             
         </div>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/gjuxdesigner/" target="_blank" aria-label="LinkedIn">
-                <img src="Linkedin.svg" alt="LinkedIn" class="social-icon-img">
+       <div class="social-links">
+            <a href="https://www.linkedin.com/in/gjuxdesigner/" target="_blank" aria-label="LinkedIn" class="social-item">
+                <img src="linkedin.svg" alt="LinkedIn" class="social-icon-img">
+                <span class="social-label">LinkedIn</span>
             </a>
             
-            <a href="https://www.behance.net/ganeshjavhare" target="_blank" aria-label="Behance">
+            <a href="https://www.behance.net/ganeshjavhare" target="_blank" aria-label="Behance" class="social-item">
                 <img src="behance.svg" alt="Behance" class="social-icon-img">
+                <span class="social-label">Behance</span>
             </a>
 
-            <a href="GJUXResume.pdf" target="_blank" aria-label="Resume">
+            <a href="GJUXResume.pdf" target="_blank" aria-label="Resume" class="social-item">
                 <img src="resume.svg" alt="Resume" class="social-icon-img">
+                <span class="social-label">Resume</span>
             </a>
         </div>
         <p style="margin-top: 10px; font-size: 0.85rem; color: var(--secondary-text);">Portfolio Views: <span id="visitor-count" style="font-weight: bold; color: var(--accent);">...</span></p>
