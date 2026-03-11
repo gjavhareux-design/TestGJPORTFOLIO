@@ -287,6 +287,17 @@
     </style>
     <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+
+    // 1. This hides the floating bubble as soon as the page loads
+    Tawk_API.onLoad = function(){
+        Tawk_API.hideWidget();
+    };
+
+    // 2. This hides it again if the recruiter minimizes the chat box
+    Tawk_API.onChatMinimized = function(){
+        Tawk_API.hideWidget();
+    };
+
     (function(){
     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
     s1.async=true;
@@ -441,7 +452,14 @@
 
     <footer id="contact" class="animate-on-scroll">
         <div class="footer-logo">Lets Build Something together</div>
-        <a href="mailto:gjavhare.ux@gmail.com" class="cta-button ripple-btn">Lets Connect</a>
+        
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+            
+            <a href="mailto:gjavhare.ux@gmail.com" class="cta-button ripple-btn">Email Me</a>
+            
+            <button onclick="Tawk_API.showWidget(); Tawk_API.maximize();" class="cta-button ripple-btn" style="border: none; font-family: inherit; background: #222; color: #fff;">Chat Now</button>
+            
+        </div>
         <div class="social-links">
             <a href="https://www.linkedin.com/in/gjuxdesigner/" target="_blank" aria-label="LinkedIn">
                 <img src="Linkedin.svg" alt="LinkedIn" class="social-icon-img">
