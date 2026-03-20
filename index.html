@@ -812,56 +812,55 @@
             s1.setAttribute('crossorigin','*');
             s0.parentNode.insertBefore(s1,s0);
         };
-        // --- 10. SUITCASE LOCK STATS ANIMATION (FIXED) ---
+        // --- 10. SUITCASE LOCK STATS ANIMATION (BULLETPROOF) ---
         setTimeout(() => {
             document.querySelectorAll('.stat-number').forEach(stat => {
                 const value = stat.innerText;
                 stat.innerHTML = ''; 
                 
-                // FIXED ALIGNMENT: Uses normal flex to keep it perfectly centered
-                stat.style.display = 'flex';
-                stat.style.justifyContent = 'center';
-                stat.style.alignItems = 'center';
+                // FIXED CONTAINER: 1.2em gives the font room to breathe without clipping
+                stat.style.display = 'inline-flex';
                 stat.style.overflow = 'hidden';
-                // FIXED HEIGHT: Forces exact sizing so numbers don't hide outside the box
-                stat.style.height = '1em'; 
-                stat.style.lineHeight = '1';
+                stat.style.height = '1.2em'; 
+                stat.style.lineHeight = '1.2em';
+                stat.style.verticalAlign = 'bottom';
 
                 [...value].forEach((char, index) => {
                     if (!isNaN(char) && char !== ' ') {
                         const col = document.createElement('span');
-                        col.style.display = 'flex';
+                        col.style.display = 'inline-flex';
                         col.style.flexDirection = 'column';
                         col.style.transition = `transform ${1.5 + (index * 0.4)}s cubic-bezier(0.16, 1, 0.3, 1)`;
                         
                         const target = parseInt(char);
-                        // The wheel of numbers it spins through
                         const sequence = [0, 8, 4, 9, 2, 7, 5, 1, 6, 3, target]; 
                         
                         sequence.forEach(num => {
                             const numSpan = document.createElement('span');
                             numSpan.innerText = num;
-                            numSpan.style.height = '1em'; // Matches the parent perfectly
+                            numSpan.style.height = '1.2em'; 
                             numSpan.style.display = 'flex';
                             numSpan.style.alignItems = 'center';
                             numSpan.style.justifyContent = 'center';
+                            // 👇 THE MAGIC FIX: Stops the browser from squishing the numbers!
+                            numSpan.style.flexShrink = '0'; 
                             col.appendChild(numSpan);
                         });
 
                         stat.appendChild(col);
 
-                        // FIXED MATH: Shifts up exactly 10 spaces. No percentages or calc() needed!
+                        // Exactly 10 jumps up * 1.2em height = -12em translation!
                         setTimeout(() => {
-                            col.style.transform = `translateY(-10em)`;
+                            col.style.transform = `translateY(-12em)`;
                         }, 50);
                         
                     } else {
-                        // Keeps symbols (+, %, M) perfectly aligned
+                        // Keeps the +, %, and M symbols perfectly aligned
                         const symbol = document.createElement('span');
                         symbol.innerText = char;
-                        symbol.style.display = 'flex';
+                        symbol.style.display = 'inline-flex';
                         symbol.style.alignItems = 'center';
-                        symbol.style.height = '1em';
+                        symbol.style.height = '1.2em';
                         stat.appendChild(symbol);
                     }
                 });
