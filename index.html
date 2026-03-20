@@ -74,6 +74,40 @@
         section { padding: 100px 0; }
         .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 40px; color: var(--primary-text); }
 
+
+        /* --- HERO LOADING ANIMATION (STAGGERED BLUR REVEAL) --- */
+        @keyframes heroReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+                filter: blur(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        /* Apply the animation to each element, starting hidden */
+        .hero h1, 
+        .hero .sub-headline, 
+        .hero .tag-container, 
+        .hero .stats-grid, 
+        .hero .cta-button, 
+        .hero .hero-quote {
+            opacity: 0; 
+            animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Stagger the timing so they cascade beautifully */
+        .hero h1 { animation-delay: 0.2s; }
+        .hero .sub-headline { animation-delay: 0.4s; }
+        .hero .tag-container { animation-delay: 0.6s; }
+        .hero .stats-grid { animation-delay: 0.8s; }
+        .hero .cta-button { animation-delay: 1.0s; }
+        .hero .hero-quote { animation-delay: 1.2s; }
+
         /* --- HERO SECTION --- */
         .hero { text-align: center; padding-top: 160px; padding-bottom: 80px; }
         h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); line-height: 1.1; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.02em;}
